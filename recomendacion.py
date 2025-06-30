@@ -2,73 +2,65 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import requests
+import os
+from dotenv import load_dotenv
 
-# 📄 Configuración general de la página
+load_dotenv()
+
+
 st.set_page_config(
     page_title="CineBot - Recomendador",
     page_icon="🎬",
     layout="wide"
 )
 
-# 🎨 Estilos CSS personalizados
+st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
 st.markdown("""
     <style>
-    /* Sidebar animado */
     [data-testid="stSidebar"] {
         background-color: rgba(30, 30, 30, 0.95);
         color: white;
         padding: 1rem;
     }
-
     .sidebar-text {
         font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
         color: #f1f1f1;
     }
-
     .blink {
         animation: blink-animation 1.5s steps(5, start) infinite;
         color: #FF9800;
         font-weight: bold;
     }
-
     @keyframes blink-animation {
-        to {
-            visibility: hidden;
-        }
+        to { visibility: hidden; }
     }
-
     .slide-in {
         animation: slideIn 1s ease-in-out;
     }
-
     @keyframes slideIn {
-        from {
-            transform: translateX(-100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        from { transform: translateX(-100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
-
     .fade-in {
         animation: fadeIn 1s ease-in-out;
     }
-
     @keyframes fadeIn {
         0% { opacity: 0; transform: translateY(20px); }
         100% { opacity: 1; transform: translateY(0); }
     }
-
     .movie-title {
-        font-weight: bold;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: #ffffff;
         text-align: center;
         margin-top: 0.5rem;
-        color: #333333;
+        font-size: 16px;
+        letter-spacing: 0.5px;
     }
-
     .stButton>button {
         background-color: #FF5722;
         color: white;
@@ -77,22 +69,25 @@ st.markdown("""
         font-size: 16px;
         transition: background-color 0.3s ease;
     }
-
     .stButton>button:hover {
         background-color: #e64a19;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 🧠 Función para obtener póster
+
 def fetch_poster(movie_id):
     try:
-        api_key = 'dddf41ab7ba39b964d38b377d61f4042'
+        api_key = os.getenv("TMDB_API_KEY")
+        if not api_key:
+            st.error("⚠️ API Key no encontrada. Verifica tu archivo .env.")
+            return 'https://via.placeholder.com/500x750?text=Sin+API+Key'
+
         url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
-        
+
         if 'poster_path' in data and data['poster_path']:
             return f"https://image.tmdb.org/t/p/w500/{data['poster_path']}"
         else:
@@ -101,14 +96,13 @@ def fetch_poster(movie_id):
         st.error(f"Error al obtener el póster: {e}")
         return 'https://via.placeholder.com/500x750?text=Error+de+conexión'
 
-# 🔍 Recomendación de películas
 def recommend(movie):
     try:
         index = movies[movies['title'] == movie].index[0]
     except IndexError:
         st.error(f"Película '{movie}' no encontrada.")
         return [], []
-    
+
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movie_names = []
     recommended_movie_posters = []
@@ -120,7 +114,6 @@ def recommend(movie):
 
     return recommended_movie_names, recommended_movie_posters
 
-# 📌 Sidebar con diseño elegante
 with st.sidebar:
     st.markdown('<h2 class="slide-in">🎬 CineBot</h2>', unsafe_allow_html=True)
     st.markdown('<h4 class="sidebar-text">Tu Guía Instantánea de Películas 🎥</h4>', unsafe_allow_html=True)
@@ -131,14 +124,14 @@ with st.sidebar:
     st.markdown('<p class="sidebar-text">👤 <span class="blink">Max</span></p>', unsafe_allow_html=True)
     st.markdown('<p class="sidebar-text">📧 <span class="blink">maxwinchez@gmail.com</span></p>', unsafe_allow_html=True)
 
-# 🧠 Cargar los datos
+
 try:
     movies = pd.read_pickle('movies.pkl')
     similarity = np.array(pd.read_pickle('similarity.pkl'))
 except Exception as e:
     st.error(f"Error al cargar los datos: {e}")
 
-# 🖼️ Interfaz principal
+
 st.title('🎥 Sistema de Recomendación de Películas')
 selected_movie = st.selectbox("🎞️ Selecciona una película", movies['title'].values)
 
@@ -155,11 +148,10 @@ if st.button('🎯 Mostrar Recomendaciones'):
     else:
         st.warning("No se encontraron recomendaciones.")
 
-# 🧾 Footer
+
 st.markdown("""
     <hr style='margin-top: 3rem;'>
     <div style='text-align: center; font-size: 14px; color: #888;'>
         © 2025 CineBot | Desarrollado por Max | Lima - Perú 🇵🇪
     </div>
 """, unsafe_allow_html=True)
-

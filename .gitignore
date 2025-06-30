@@ -1,7 +1,16 @@
+# Archivos de Python
 __pycache__/
 *.pyc
+
+# Archivos de datos
 *.pkl
 *.db
+
+# Archivos ocultos del sistema
 .DS_Store
+
+# Variables de entorno
 .env
+
+# Configuración de VSCode
 .vscode/
