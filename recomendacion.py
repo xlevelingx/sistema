@@ -62,7 +62,7 @@ st.markdown("""
         letter-spacing: 0.5px;
     }
     .stButton>button {
-        background-color: #FF5722;
+        background-color: #9c1204;
         color: white;
         border-radius: 8px;
         padding: 10px 16px;
@@ -70,7 +70,7 @@ st.markdown("""
         transition: background-color 0.3s ease;
     }
     .stButton>button:hover {
-        background-color: #e64a19;
+        background-color: black;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -117,14 +117,24 @@ def recommend(movie):
 with st.sidebar:
     st.markdown('<h2 class="slide-in">🎬 CineBot</h2>', unsafe_allow_html=True)
     st.markdown('<h4 class="sidebar-text">Tu Guía Instantánea de Películas 🎥</h4>', unsafe_allow_html=True)
-    st.image('https://img.blogs.es/iahuawei/wp-content/uploads/2018/12/mitos-1080x675.jpg', use_column_width=True)
+    st.image('images/sololeveling.gif', use_column_width=True)
+    st.markdown('<hr>', unsafe_allow_html=True)
+    st.image('images/goku.gif', use_column_width=True)
+    st.markdown('<hr>', unsafe_allow_html=True)
+    st.image('images/gojo.gif', use_column_width=True)
+    st.markdown('<hr>', unsafe_allow_html=True)
+    st.image('images/shipudeen.gif', use_column_width=True)
     st.markdown('<hr>', unsafe_allow_html=True)
     st.markdown('<p class="sidebar-text">✨ Recomendaciones de películas en tiempo real con <strong>CineBot</strong>.</p>', unsafe_allow_html=True)
-    st.markdown('<hr>', unsafe_allow_html=True)
-    st.markdown('<p class="sidebar-text">👤 <span class="blink">Max</span></p>', unsafe_allow_html=True)
-    st.markdown('<p class="sidebar-text">📧 <span class="blink">maxwinchez@gmail.com</span></p>', unsafe_allow_html=True)
-
-
+    st.markdown("""
+        <div style='font-family: "Segoe UI", sans-serif; font-size: 13px; color: #aaa; margin-top: 20px;'>
+            <p style="margin-bottom: 2px;">📌 <span style="font-weight: 300;">Autor</span></p>
+            <hr style="border: none; border-top: 0.3px solid #ccc; margin: 4px 0;">
+            <p style="margin-bottom: 2px;">👤 <span style="font-weight: 300;">Max Winchez</span></p>
+            <p style="margin-top: 0;">📧 <span style="font-weight: 300;">maxwinchez@gmail.com</span></p>
+        </div>
+    """, unsafe_allow_html=True)
+    
 try:
     movies = pd.read_pickle('movies.pkl')
     similarity = np.array(pd.read_pickle('similarity.pkl'))
@@ -148,10 +158,9 @@ if st.button('🎯 Mostrar Recomendaciones'):
     else:
         st.warning("No se encontraron recomendaciones.")
 
-
 st.markdown("""
     <hr style='margin-top: 3rem;'>
     <div style='text-align: center; font-size: 14px; color: #888;'>
-        © 2025 CineBot | Desarrollado por Max | Lima - Perú 🇵🇪
+        © 2025 CineBot Max | Lima, Perú. Todos los derechos reservados.
     </div>
 """, unsafe_allow_html=True)
