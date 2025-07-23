@@ -16,7 +16,8 @@ st.set_page_config(
     menu_items={
         'Get Help': None,         
         'Report a Bug': None,    
-        'About': None             
+        'About': None,
+        'GitHub': None             
     }
 )
 
