@@ -11,15 +11,16 @@ load_dotenv()
 st.set_page_config(
     page_title="CineBot - Recomendador",
     page_icon="🎬",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': None,         
-        'Report a Bug': None,    
-        'About': None,
-        'GitHub': None             
-    }
+    layout="wide"
 )
+
+st.markdown("""
+    <style>
+        .css-1n7v3ny {
+            visibility: hidden;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
