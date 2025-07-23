@@ -7,25 +7,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
+# Configuración de la página sin el ícono de GitHub
 st.set_page_config(
     page_title="CineBot - Recomendador",
     page_icon="🎬",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded",  # Sidebar expandido por defecto
+    menu_items={
+        'Get Help': None,  # Elimina la opción "Get Help"
+        'Report a Bug': None,  # Elimina la opción "Report a Bug"
+        'About': None,  # Elimina la opción "About"
+    }
 )
 
-st.markdown("""
-    <style>
-        .css-1n7v3ny {
-            visibility: hidden;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-""", unsafe_allow_html=True)
-
+# CSS para personalización
 st.markdown("""
     <style>
     [data-testid="stSidebar"] {
@@ -83,7 +78,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
+# Función para obtener el póster de la película
 def fetch_poster(movie_id):
     try:
         api_key = os.getenv("TMDB_API_KEY")
@@ -104,6 +99,7 @@ def fetch_poster(movie_id):
         st.error(f"Error al obtener el póster: {e}")
         return 'https://via.placeholder.com/500x750?text=Error+de+conexión'
 
+# Función para obtener recomendaciones
 def recommend(movie):
     try:
         index = movies[movies['title'] == movie].index[0]
@@ -122,6 +118,7 @@ def recommend(movie):
 
     return recommended_movie_names, recommended_movie_posters
 
+# Sidebar con imágenes y datos
 with st.sidebar:
     st.markdown('<h2 class="slide-in">🎬 CineBot</h2>', unsafe_allow_html=True)
     st.markdown('<h4 class="sidebar-text">Tu Guía Instantánea de Películas 🎥</h4>', unsafe_allow_html=True)
@@ -144,13 +141,14 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
 
+# Procesar películas y mostrar recomendaciones
 try:
     movies = pd.read_pickle('movies.pkl')
     similarity = np.array(pd.read_pickle('similarity.pkl'))
 except Exception as e:
     st.error(f"Error al cargar los datos: {e}")
 
-
+# Selección de película y recomendaciones
 st.title('🎥 Sistema de Recomendación de Películas')
 selected_movie = st.selectbox("🎞️ Selecciona una película", movies['title'].values)
 
@@ -167,6 +165,7 @@ if st.button('🎯 Mostrar Recomendaciones'):
     else:
         st.warning("No se encontraron recomendaciones.")
 
+# Footer
 st.markdown("""
     <hr style='margin-top: 3rem;'>
     <div style='text-align: center; font-size: 14px; color: #888;'>
