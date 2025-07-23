@@ -11,7 +11,13 @@ load_dotenv()
 st.set_page_config(
     page_title="CineBot - Recomendador",
     page_icon="🎬",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': None,         
+        'Report a Bug': None,    
+        'About': None             
+    }
 )
 
 st.markdown("""
