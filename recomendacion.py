@@ -117,16 +117,17 @@ def recommend(movie):
 with st.sidebar:
     st.markdown('<h2 class="slide-in">🎬 CineBot</h2>', unsafe_allow_html=True)
     st.markdown('<h4 class="sidebar-text">Tu Guía Instantánea de Películas 🎥</h4>', unsafe_allow_html=True)
-    st.image('images/sololeveling.gif', use_column_width=True)
+    st.image('images/sololeveling.gif', use_container_width=True)
     st.markdown('<hr>', unsafe_allow_html=True)
-    st.image('images/goku.gif', use_column_width=True)
+    st.image('images/goku.gif', use_container_width=True)
     st.markdown('<hr>', unsafe_allow_html=True)
-    st.image('images/gojo.gif', use_column_width=True)
+    st.image('images/gojo.gif', use_container_width=True)
     st.markdown('<hr>', unsafe_allow_html=True)
-    st.image('images/shipudeen.gif', use_column_width=True)
+    st.image('images/shipudeen.gif', use_container_width=True)
     st.markdown('<hr>', unsafe_allow_html=True)
+
     st.markdown('<p class="sidebar-text">✨ Recomendaciones de películas en tiempo real con <strong>CineBot</strong>.</p>', unsafe_allow_html=True)
-    st.markdown("""
+    st.markdown(""" 
         <div style='font-family: "Segoe UI", sans-serif; font-size: 13px; color: #aaa; margin-top: 20px;'>
             <p style="margin-bottom: 2px;">📌 <span style="font-weight: 300;">Autor</span></p>
             <hr style="border: none; border-top: 0.3px solid #ccc; margin: 4px 0;">
@@ -134,7 +135,7 @@ with st.sidebar:
             <p style="margin-top: 0;">📧 <span style="font-weight: 300;">maxwinchez@gmail.com</span></p>
         </div>
     """, unsafe_allow_html=True)
-    
+
 try:
     movies = pd.read_pickle('movies.pkl')
     similarity = np.array(pd.read_pickle('similarity.pkl'))
