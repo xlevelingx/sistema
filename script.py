@@ -5,19 +5,16 @@ import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+#by max
 pd.set_option('display.max_columns', None)
-
 
 movies = pd.read_csv('archive/tmdb_5000_movies.csv')
 credits = pd.read_csv('archive/tmdb_5000_credits.csv', encoding='utf-8')
 
-
 movies = movies.merge(credits, on='title')
 movies.dropna(inplace=True)
 
-
 movies = movies[['movie_id', 'title', 'overview', 'genres', 'keywords', 'cast', 'crew']]
-
 
 def convert(text):
     L = []
