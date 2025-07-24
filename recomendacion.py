@@ -4,6 +4,8 @@ import numpy as np
 import requests
 import os
 from dotenv import load_dotenv
+import datetime
+import time 
 
 load_dotenv()
 
@@ -159,9 +161,18 @@ if st.button('🎯 Mostrar Recomendaciones'):
     else:
         st.warning("No se encontraron recomendaciones.")
 
-st.markdown("""
-    <hr style='margin-top: 3rem;'>
-    <div style='text-align: center; font-size: 14px; color: #888;'>
-        © 2025 CineBot Max | Lima, Perú. Todos los derechos reservados.
-    </div>
-""", unsafe_allow_html=True)
+footer_placeholder = st.empty()
+
+while True:
+    current_year = datetime.datetime.now().year
+
+    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+
+    footer_placeholder.markdown(f"""
+        <hr style='margin-top: 3rem;'>
+        <div style='text-align: center; font-size: 14px; color: #888;'>
+            © {current_year} CineBot Max | Lima, Perú. Todos los derechos reservados. {current_time}
+        </div>
+    """, unsafe_allow_html=True)
+
+    time.sleep(1)
