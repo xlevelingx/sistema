@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#by max
+
 st.set_page_config(
     page_title="CineBot - Recomendador",
     page_icon="🎬",
