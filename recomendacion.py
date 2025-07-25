@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 import datetime
 import time 
+import pytz 
 
 load_dotenv()
 
@@ -161,12 +162,14 @@ if st.button('🎯 Mostrar Recomendaciones'):
     else:
         st.warning("No se encontraron recomendaciones.")
 
+
+
 footer_placeholder = st.empty()
+peru_tz = pytz.timezone('America/Lima')
 
 while True:
-    current_year = datetime.datetime.now().year
-
-    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+    current_year = datetime.datetime.now(peru_tz).year
+    current_time = datetime.datetime.now(peru_tz).strftime("%H:%M:%S")
 
     footer_placeholder.markdown(f"""
         <hr style='margin-top: 3rem;'>
