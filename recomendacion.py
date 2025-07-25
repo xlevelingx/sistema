@@ -75,6 +75,16 @@ st.markdown("""
     .stButton>button:hover {
         background-color: black;
     }
+
+    .social-icon {
+        font-size: 25px;
+        margin: 0 25px;
+        transition: transform 0.5s ease, color 0.3s ease; 
+    }
+    .social-icon:hover {
+        transform: scale(1.5); 
+        color: #ffffff; 
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -161,7 +171,24 @@ if st.button('🎯 Mostrar Recomendaciones'):
                 )
     else:
         st.warning("No se encontraron recomendaciones.")
-
+        
+        
+st.markdown("""
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <div style="text-align: center;">
+        <br><br>
+        <h4 style="font-size: 18px; color: #888; margin-bottom: 10px;">Conéctate conmigo</h4>
+        <a href="https://www.facebook.com/wr.max.404270" target="_blank" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://github.com/" target="_blank" class="social-icon">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/max-winchez-rivera-3719a4237/" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </div>
+""", unsafe_allow_html=True)
 
 
 footer_placeholder = st.empty()
@@ -179,3 +206,5 @@ while True:
     """, unsafe_allow_html=True)
 
     time.sleep(1)
+    
+
