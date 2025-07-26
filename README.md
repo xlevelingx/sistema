@@ -24,7 +24,7 @@ streamlit run recomendacion.py
 --------------------------------------------------
 
 
-## ✨ Desarrollado por
+## Desarrollado por
 
 Max:
 📍 Lima, Perú 🇵🇪

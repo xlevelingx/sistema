@@ -80,16 +80,17 @@ st.markdown("""
 
     /* para las redes sociales*/
         .social-icon {
-            font-size: 20px;
+            font-size: 25px;
             margin: 0 20px;
             transition: transform 1s ease, background-color 0.3s, box-shadow 0.3s;
             padding: 12px;
             border-radius: 50%;
             display: inline-block;
         }
-        .social-icon:hover {
+        .social-icon:hover,
+        .social-icon:active {  
             transform: rotate(360deg) scale(1.2); 
-            box-shadow: 0 0 20px rgba(255, 87, 34, 0.7); 
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.7);  
         }
         .social-icon i {
             color: white;
