@@ -23,6 +23,7 @@ st.markdown("""
 
 st.markdown("""
     <style>
+    /* para el sidebar*/
     [data-testid="stSidebar"] {
         background-color: rgba(30, 30, 30, 0.95);
         color: white;
@@ -75,16 +76,92 @@ st.markdown("""
     .stButton>button:hover {
         background-color: black;
     }
+    
 
-    .social-icon {
-        font-size: 25px;
-        margin: 0 25px;
-        transition: transform 0.5s ease, color 0.3s ease; 
-    }
-    .social-icon:hover {
-        transform: scale(1.5); 
-        color: #ffffff; 
-    }
+    /* para las redes sociales*/
+        .social-icon {
+            font-size: 20px;
+            margin: 0 20px;
+            transition: transform 1s ease, background-color 0.3s, box-shadow 0.3s;
+            padding: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .social-icon:hover {
+            transform: rotate(360deg) scale(1.2); 
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.7); 
+        }
+        .social-icon i {
+            color: white;
+        }
+        
+    
+    /* para el titulo Sistema de Películas en Tiempo Real*/
+        @keyframes slideInFromLeft {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { transform: translateX(20px); opacity: 0.7; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes color-shift {
+            0% { 
+                color: #FF5722; 
+                box-shadow: 0 0 20px 6px #FF5722; 
+            }
+            10% { 
+                color: #3F51B5; 
+                box-shadow: 0 0 20px 6px #3F51B5; 
+            }
+            20% { 
+                color: #4CAF50; 
+                box-shadow: 0 0 20px 6px #4CAF50; 
+            }
+            30% { 
+                color: #FFC107; 
+                box-shadow: 0 0 20px 6px #FFC107; 
+            }
+            40% { 
+                color: #9C27B0; 
+                box-shadow: 0 0 20px 6px #9C27B0; 
+            }
+            50% { 
+                color: #FF9800; 
+                box-shadow: 0 0 20px 6px #FF9800; 
+            }
+            60% { 
+                color: #00BCD4; 
+                box-shadow: 0 0 20px 6px #00BCD4; 
+            }
+            70% { 
+                color: #8BC34A; 
+                box-shadow: 0 0 20px 6px #8BC34A; 
+            }
+            80% { 
+                color: #673AB7; 
+                box-shadow: 0 0 20px 6px #673AB7; 
+            }
+            90% { 
+                color: #E91E63; 
+                box-shadow: 0 0 20px 6px #E91E63; 
+            }
+            100% { 
+                color: #FF5722; 
+                box-shadow: 0 0 20px 6px #FF5722; 
+            }
+        }
+        .animated-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            animation: 
+                slideInFromLeft 1.1s ease-out, 
+                color-shift 1.1s ease-in-out infinite; 
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+        .animated-title:hover {
+            transform: scale(1.1); 
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -156,7 +233,12 @@ except Exception as e:
     st.error(f"Error al cargar los datos: {e}")
 
 
-st.title('🎥 Sistema de Recomendación de Películas')
+st.markdown("""
+    <div class="animated-title">
+        🎥 Sistema de Películas en Tiempo Real
+    </div>
+    <br>
+""", unsafe_allow_html=True)
 selected_movie = st.selectbox("🎞️ Selecciona una película", movies['title'].values)
 
 if st.button('🎯 Mostrar Recomendaciones'):
@@ -177,7 +259,7 @@ st.markdown("""
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <div style="text-align: center;">
         <br><br>
-        <h4 style="font-size: 18px; color: #888; margin-bottom: 10px;">Conéctate conmigo</h4>
+        <h4 style="font-size: 18px; color: #888; margin-bottom: 10px;">Encuentrame en</h4>
         <a href="https://www.facebook.com/wr.max.404270" target="_blank" class="social-icon">
             <i class="fab fa-facebook-f"></i>
         </a>

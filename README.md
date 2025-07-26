@@ -6,7 +6,7 @@ Con una interfaz amigable y visual, permite al usuario seleccionar una película
 --------------------------------------------------
 
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - **Python 3**
 - **Streamlit**
@@ -17,7 +17,7 @@ Con una interfaz amigable y visual, permite al usuario seleccionar una película
 --------------------------------------------------
 
 
-## 🧠 Ejecutar la app
+## Ejecutar la app
 
 streamlit run recomendacion.py
 
