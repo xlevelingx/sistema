@@ -80,7 +80,7 @@ st.markdown("""
 
     /* para las redes sociales*/
         .social-icon {
-            font-size: 22px;
+            font-size: 25px;
             margin: 0 20px;
             transition: transform 1s ease, background-color 0.3s, box-shadow 0.3s;
             padding: 12px;
@@ -104,17 +104,50 @@ st.markdown("""
             100% { transform: translateX(0); opacity: 1; }
         }
         @keyframes color-shift {
-            0% { color: #FF5722; filter: brightness(1.5); } 
-            10% { color: #3F51B5; filter: brightness(1.5); } 
-            20% { color: #4CAF50; filter: brightness(1.5); } 
-            30% { color: #FFC107; filter: brightness(1.5); } 
-            40% { color: #9C27B0; filter: brightness(1.5); }
-            50% { color: #FF9800; filter: brightness(1.5); } 
-            60% { color: #00BCD4; filter: brightness(1.5); } 
-            70% { color: #8BC34A; filter: brightness(1.5); } 
-            80% { color: #673AB7; filter: brightness(1.5); } 
-            90% { color: #E91E63; filter: brightness(1.5); } 
-            100% { color: #FF5722; filter: brightness(1.5); } 
+            0% { 
+                color: #FF5722; 
+                box-shadow: 0 0 10px 6px #FF5722; 
+            }
+            10% { 
+                color: #3F51B5; 
+                box-shadow: 0 0 10px 6px #3F51B5; 
+            }
+            20% { 
+                color: #4CAF50; 
+                box-shadow: 0 0 10px 6px #4CAF50; 
+            }
+            30% { 
+                color: #FFC107; 
+                box-shadow: 0 0 10px 6px #FFC107; 
+            }
+            40% { 
+                color: #9C27B0; 
+                box-shadow: 0 0 10px 6px #9C27B0; 
+            }
+            50% { 
+                color: #FF9800; 
+                box-shadow: 0 0 10px 6px #FF9800; 
+            }
+            60% { 
+                color: #00BCD4; 
+                box-shadow: 0 0 10px 6px #00BCD4; 
+            }
+            70% { 
+                color: #8BC34A; 
+                box-shadow: 0 0 10px 6px #8BC34A; 
+            }
+            80% { 
+                color: #673AB7; 
+                box-shadow: 0 0 10px 6px #673AB7; 
+            }
+            90% { 
+                color: #E91E63; 
+                box-shadow: 0 0 10px 6px #E91E63; 
+            }
+            100% { 
+                color: #FF5722; 
+                box-shadow: 0 0 10px 6px #FF5722; 
+            }
         }
         .animated-title {
             font-family: 'Poppins', sans-serif;
