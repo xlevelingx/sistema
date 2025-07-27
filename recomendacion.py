@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import datetime
 import time 
 import pytz 
+from babel.dates import format_date
 
 load_dotenv()
 
@@ -274,18 +275,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-footer_placeholder = st.empty()
 peru_tz = pytz.timezone('America/Lima')
+footer_placeholder = st.empty()
 
 while True:
-    current_year = datetime.datetime.now(peru_tz).year
-    current_day = datetime.datetime.now(peru_tz).strftime("%A, %d de %B de %Y")  
+    now = datetime.datetime.now(peru_tz)
+    current_day = format_date(now, format='full', locale='es_PE')
     current_time = datetime.datetime.now(peru_tz).strftime("%I:%M:%S %p").replace("AM", "a. m.").replace("PM", "p. m.").replace("Â", "")
 
     footer_placeholder.markdown(f"""
         <hr style='margin-top: 3rem;'>
         <div style='text-align: center; font-size: 14px; color: #888;'>
-            © {current_year} CineBot Max | Lima, Perú. Todos los derechos reservados. {current_time}
+            © {now.year} CineBot Max | Lima, Perú. Todos los derechos reservados. {current_time}
         </div>
         <br>
         <div style='text-align: center; font-size: 14px; color: #888;'>
