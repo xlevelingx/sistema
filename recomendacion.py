@@ -276,13 +276,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+# Zona horaria de Perú
 peru_tz = pytz.timezone('America/Lima')
 footer_placeholder = st.empty()
 
-while True:
+# Función que se encargará de mostrar la hora y la fecha
+def update_time():
     now = datetime.datetime.now(peru_tz)
     current_day = format_date(now, format='full', locale='es_PE')
-    current_time = datetime.datetime.now(peru_tz).strftime("%I:%M:%S %p").replace("AM", "a. m.").replace("PM", "p. m.").replace("Â", "")
+    current_time = now.strftime("%I:%M:%S %p").replace("AM", "a. m.").replace("PM", "p. m.").replace("Â", "")
 
     footer_placeholder.markdown(f"""
         <hr style='margin-top: 3rem;'>
@@ -295,6 +297,12 @@ while True:
         </div>
     """, unsafe_allow_html=True)
 
-    time.sleep(1)
+# Mostrar la hora inicial
+update_time()
+
+# Actualización constante cada segundo sin bloquear el ciclo
+while True:
+    time.sleep(1)  # Pausa de 1 segundo para actualizar cada segundo
+    update_time()
     
 
