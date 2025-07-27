@@ -1,4 +1,4 @@
-# 🎬 CineBot - Sistema de Recomendación de Películas
+# CineBot - Sistema de Recomendación de Películas
 
 CineBot es una aplicación web desarrollada con **Python** y **Streamlit**, que recomienda películas en `.TIEMPO REAL` utilizando técnicas de Machine Learning basadas en similitud de contenido.  
 Con una interfaz amigable y visual, permite al usuario seleccionar una película y recibir recomendaciones personalizadas acompañadas de sus respectivos pósters.
