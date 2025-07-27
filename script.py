@@ -5,6 +5,7 @@ import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+# by maxx
 pd.set_option('display.max_columns', None)
 
 
