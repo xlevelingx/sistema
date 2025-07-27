@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 import datetime
 import time 
 import pytz 
-import locale
 
 load_dotenv()
 
@@ -278,8 +277,6 @@ st.markdown("""
 footer_placeholder = st.empty()
 peru_tz = pytz.timezone('America/Lima')
 
-locale.setlocale(locale.LC_TIME, 'es_PE.UTF-8')  
-
 while True:
     current_year = datetime.datetime.now(peru_tz).year
     current_day = datetime.datetime.now(peru_tz).strftime("%A, %d de %B de %Y")  
@@ -297,4 +294,5 @@ while True:
     """, unsafe_allow_html=True)
 
     time.sleep(1)
+    
 
