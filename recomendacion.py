@@ -188,6 +188,21 @@ def fetch_poster(movie_id):
     except requests.exceptions.RequestException as e:
         st.error(f"Error al obtener el póster: {e}")
         return 'https://via.placeholder.com/500x750?text=Error+de+conexión'
+    
+    
+def get_movie_url(movie_id):
+    api_key = os.getenv("TMDB_API_KEY")
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=es"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        movie_url = f"https://www.themoviedb.org/movie/{movie_id}"
+        return movie_url
+    else:
+        st.error(f"Error al obtener la URL de la película con ID {movie_id}")
+        return None
+
 
 def recommend(movie):
     try:
@@ -242,22 +257,53 @@ st.markdown("""
     </div>
     <br>
 """, unsafe_allow_html=True)
-selected_movie = st.selectbox("🎞️ Selecciona una película", movies['title'].values)
 
+
+selected_movie = st.selectbox("🎞️ Selecciona una película", movies['title'].values)
 if st.button('🎯 Mostrar Recomendaciones'):
     recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
     if recommended_movie_names:
         cols = st.columns(5)
         for i, col in enumerate(cols):
             if i < len(recommended_movie_names):
-                col.markdown(
-                    f"<div class='fade-in'><img src='{recommended_movie_posters[i]}' width='100%'><p class='movie-title'>{recommended_movie_names[i]}</p></div>",
-                    unsafe_allow_html=True
-                )
+                with col:
+                    st.image(recommended_movie_posters[i], use_container_width=True)
+                    st.text(recommended_movie_names[i])      
+                    movie_id = movies[movies['title'] == recommended_movie_names[i]]['movie_id'].values[0]
+                    movie_url = get_movie_url(movie_id)
+                    
+                    if movie_url:
+                        st.markdown(f"""
+                        <a href="{movie_url}" target="_blank">
+                            <button style='
+                                background: linear-gradient(135deg, #FF5722, #FF3D00); /* Color más fuerte */
+                                color: white;
+                                border: none;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                cursor: pointer;
+                                margin-top: 10px;
+                                font-size: 16px;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                            '>Ver Película</button>
+                        </a>
+                        """, unsafe_allow_html=True)
+                    else:
+                        st.warning("No se pudo obtener el enlace para esta película")
     else:
         st.warning("No se encontraron recomendaciones.")
-        
-        
+  
+st.markdown("""
+<style>
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 87, 34, 0.7);
+    }
+</style>
+""", unsafe_allow_html=True)        
+
+    
 st.markdown("""
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <div style="text-align: center;">
