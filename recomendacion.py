@@ -322,23 +322,28 @@ st.markdown("""
 
 peru_tz = pytz.timezone('America/Lima')
 footer_placeholder = st.empty()
+clock_placeholder = st.sidebar.empty()
 
-while True:
-    now = datetime.datetime.now(peru_tz)
-    current_day = format_date(now, format='full', locale='es_PE')
-    current_time = datetime.datetime.now(peru_tz).strftime("%I:%M:%S %p").replace("AM", "a. m.").replace("PM", "p. m.").replace("Â", "")
-
-    footer_placeholder.markdown(f"""
-        <hr style='margin-top: 3rem;'>
-        <div style='text-align: center; font-size: 14px; color: #888;'>
-            © {now.year} CineBot Max | Lima, Perú. Todos los derechos reservados. {current_time}
-        </div>
-        <br>
-        <div style='text-align: center; font-size: 14px; color: #888;'>
-             {current_day}
-        </div>
-    """, unsafe_allow_html=True)
-
-    time.sleep(1)
+try:
+    while True:
+        now = datetime.datetime.now(peru_tz)
+        current_time = now.strftime("%I:%M:%S %p").replace("AM", "a. m.").replace("PM", "p. m.")
+        current_day = format_date(now, format='full', locale='es_PE')
+        clock_placeholder.markdown(f"🕒 **{current_time}**")
+        
+        footer_placeholder.markdown(f"""
+            <hr style='margin-top: 3rem;'>
+            <div style='text-align: center; font-size: 14px; color: #888;'>
+                © {now.year} Max | Lima, Perú. Todos los derechos reservados. {current_time}
+            </div>
+            <br>
+            <div style='text-align: center; font-size: 14px; color: #888;'>
+                  {current_day}
+            </div>
+        """, unsafe_allow_html=True)
+        
+        time.sleep(1)
+except Exception:
+    pass
     
 
