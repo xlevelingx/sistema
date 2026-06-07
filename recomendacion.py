@@ -203,15 +203,13 @@ def get_movie_url(movie_id):
         st.error(f"Error al obtener la URL de la película con ID {movie_id}")
         return None
 
-
 def recommend(movie):
     try:
         index = movies[movies['title'] == movie].index[0]
-    except IndexError:
-        st.error(f"Película '{movie}' no encontrada.")
+        distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
+    except Exception:
         return [], []
 
-    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movie_names = []
     recommended_movie_posters = []
 
@@ -292,7 +290,7 @@ if st.button('🎯 Mostrar Recomendaciones'):
                     else:
                         st.warning("No se pudo obtener el enlace para esta película")
     else:
-        st.warning("No se encontraron recomendaciones.")
+        st.warning("Lo sentimos, no se encontraron películas para esta búsqueda.")
   
 st.markdown("""
 <style>
